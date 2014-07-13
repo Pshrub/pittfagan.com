@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel=stylesheet type="text/css" href="normalize.css" />
+        <link rel=stylesheet type="text/css" href="main.css" />
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <script>
+            var wallpapers = [ 'blackout-nyc', 'boulder', 'downtown-nyc', 'flag', 'monument' ],
+                randomWallpaperIndex = Math.floor(Math.random() * wallpapers.length),
+                randomWallpaper = wallpapers[randomWallpaperIndex],
+                wallpaper = 'wallpapers/' + randomWallpaper + '.jpg';
+
+            document.querySelector('body').style.backgroundImage = 'url(' + wallpaper + ')';
+        </script>
+        <main>
+            <div class=main-content>
+                <p><a href="http://davidpadbury.com">David Padbury</a></p>
+                <p class=buttons>
+                    <a href="https://twitter.com/davidpadbury"><i class="fa fa-twitter fa-1x"></i></a>
+                    <a href="https://www.linkedin.com/pub/david-padbury/4/437/656"><i class="fa fa-linkedin fa-1x"></i></a>
+                    <a href="https://github.com/davidpadbury"><i class="fa fa-github fa-1x"></i></a>
+                </p>
+            </div>
+        </main>
+        <script src="main.js"></script>
+    </body>
+</html>
