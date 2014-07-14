@@ -1,18 +1,22 @@
 <!doctype html>
 <html>
     <head>
+        <title>David Padbury</title>
         <link rel=stylesheet type="text/css" href="normalize.css" />
         <link rel=stylesheet type="text/css" href="main.css" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     </head>
-    <body>
+    <body class="no-js">
         <script>
             var wallpapers = [ 'blackout-nyc', 'boulder', 'downtown-nyc', 'flag', 'monument' ],
                 randomWallpaperIndex = Math.floor(Math.random() * wallpapers.length),
                 randomWallpaper = wallpapers[randomWallpaperIndex],
                 wallpaper = 'wallpapers/' + randomWallpaper + '.jpg';
 
-            document.querySelector('body').style.backgroundImage = 'url(' + wallpaper + ')';
+            var body = document.body;
+
+            body.style.backgroundImage = 'url(' + wallpaper + ')';
+            body.className = 'has-js';
         </script>
         <main>
             <div class=main-content>

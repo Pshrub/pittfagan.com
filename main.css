@@ -6,6 +6,10 @@ body {
     background-position: center;
 }
 
+body.no-js {
+    background-image: url(wallpapers/monument.jpg);
+}
+
 main {
     display: block;
 }
@@ -25,10 +29,6 @@ main .main-content {
     line-height: 1.45;
     margin: 0;
     padding: 0;
-    -ms-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
     -webkit-font-smoothing: antialiased;
     text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
     -ms-user-select: none;
@@ -36,6 +36,17 @@ main .main-content {
     -webkit-user-select: none;
     user-select: none;
     cursor: default;
+}
+
+body.no-js main .main-content {
+    margin-top: 50px;
+}
+
+body.has-js main .main-content {
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 main .main-content p {
