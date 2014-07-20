@@ -41,7 +41,7 @@
     addEvent(window, 'resize', throttle(resizeMain, 100));
     resizeMain();
 
-    if (console && console.log) {
+    if (console && console.log && atob) {
         var image = atob(getImage());
         console.log(image);
     }
