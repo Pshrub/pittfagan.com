@@ -26,7 +26,8 @@
     }
 
     function resizeMain() {
-        els.main.style.height = window.innerHeight + 'px';
+        var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        els.main.style.height = height + 'px';
     }
     
     function addEvent(el, evt, fn) {
