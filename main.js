@@ -6,7 +6,7 @@
 
     // Cache access to common elements
     var els = {
-        main: document.querySelector('main')
+        main: document.getElementsByTagName('main')[0]
     };
 
     function throttle(fn, duration) {
@@ -28,8 +28,16 @@
     function resizeMain() {
         els.main.style.height = window.innerHeight + 'px';
     }
+    
+    function addEvent(el, evt, fn) {
+        if (el.addEventListener) {
+            el.addEventListener(evt, fn);
+        } else if (el.attachEvent) {
+            el.attachEvent('on' + evt, fn);
+        }
+    }
 
-    window.addEventListener('resize', throttle(resizeMain, 100));
+    addEvent(window, 'resize', throttle(resizeMain, 100));
     resizeMain();
 
     if (console && console.log) {
