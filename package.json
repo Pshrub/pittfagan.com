@@ -1,0 +1,19 @@
+{
+  "name": "davidpadbury.com",
+  "version": "1.0.0",
+  "description": "davidpadbury.com Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"no tests\";exit 1;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidpadbury/davidpadbury.github.io.git"
+  },
+  "author": "David Padbury <david@davidpadbury.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidpadbury/davidpadbury.github.io/issues"
+  },
+  "homepage": "https://github.com/davidpadbury/davidpadbury.github.io#readme"
+}
