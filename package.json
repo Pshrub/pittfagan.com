@@ -4,6 +4,7 @@
   "description": "davidpadbury.com Website",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"no tests\";exit 1;"
   },
   "repository": {
