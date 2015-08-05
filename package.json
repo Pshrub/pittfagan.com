@@ -25,6 +25,10 @@
     "del": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-imagemin": "^2.3.0",
-    "imagemin-jpeg-recompress": "^4.3.0"
+    "imagemin-jpeg-recompress": "^4.3.0",
+    "mkdirp-promise": "^1.0.2",
+    "request": "^2.60.0",
+    "request-promise": "^0.4.3",
+    "unzip": "^0.1.11"
   }
 }
