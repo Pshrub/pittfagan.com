@@ -32,14 +32,14 @@ gulp.task('fetch-fonticons', async function() {
             .on('entry', (entry) => {
                 // get extension without period
                 const ext = path.extname(entry.path).slice(1);
-                const use = ['css', 'eot', 'woff', 'ttf', 'svg'].includes(ext);
+                const filename = path.basename(entry.path);
+                const use = ['eot', 'svg'].includes(ext)  // only need eot and svg fonts, woff and ttf are embedded
+                    || filename === 'fonticons-embedded.css'; // only need the embedded version of the css
 
                 if (use) {
-                    const filename = path.basename(entry.path);
-
                     if (ext === 'css') {
                         // put in css dir
-                        entry.pipe(fs.createWriteStream(`${__dirname}/dist/css/${filename}`));
+                        entry.pipe(fs.createWriteStream(`${__dirname}/dist/css/fonticons.css`));
                     } else {
                         // put in fonts dir
                         entry.pipe(fs.createWriteStream(`${__dirname}/dist/font/${filename}`));
