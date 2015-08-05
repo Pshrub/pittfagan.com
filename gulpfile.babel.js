@@ -7,7 +7,7 @@ gulp.task('clean', (callback) => {
     del('dist', callback);
 });
 
-gulp.task('wallpapers', () => {
+gulp.task('optimize-wallpapers', () => {
     return gulp.src('wallpapers/*.jpg')
         .pipe(imagemin({
             use: [jpegRecompress({
@@ -15,3 +15,5 @@ gulp.task('wallpapers', () => {
         }))
         .pipe(gulp.dest('dist/wallpapers'));
 });
+
+gulp.task('build', [ 'optimize-wallpapers' ]);
