@@ -1,3 +1,11 @@
+# vim temp files
 *.swp
+
+# osx temp files
 .DS_Store
+
+# node modules - npm install instead
 node_modules/
+
+# build artifacts
+dist

@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+app.use(express.static('dist', {
+    index: false
+}));
 app.use(express.static('public', {
     index: false
 }));
