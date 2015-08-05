@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/davidpadbury/davidpadbury.github.io/issues"
   },
-  "homepage": "http://davidpadbury.com"
+  "homepage": "http://davidpadbury.com",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
 }
