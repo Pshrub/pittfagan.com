@@ -6,10 +6,6 @@ body {
     background-position: center;
 }
 
-body.no-js {
-    background-image: url(wallpapers/monument.jpg);
-}
-
 main {
     display: block;
 }

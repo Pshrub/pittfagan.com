@@ -19,7 +19,8 @@
   "homepage": "http://davidpadbury.com",
   "dependencies": {
     "babel": "^5.8.20",
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "express-handlebars": "^2.0.1"
   },
   "devDependencies": {
     "del": "^1.2.0",

@@ -5,19 +5,13 @@
         <link rel=stylesheet type="text/css" href="normalize.css" />
         <link rel=stylesheet type="text/css" href="main.css" />
         <link rel="stylesheet" href="css/fonticons.css">
+        <style>
+            body {
+                background-image: url('wallpapers/{{wallpaper}}');
+            }
+        </style>
     </head>
     <body class="no-js">
-        <script>
-            var wallpapers = [ 'boulder', 'downtown-nyc', 'flag', 'monument' ],
-                randomWallpaperIndex = Math.floor(Math.random() * wallpapers.length),
-                randomWallpaper = wallpapers[randomWallpaperIndex],
-                wallpaper = 'wallpapers/' + randomWallpaper + '.jpg';
-
-            var body = document.body;
-
-            body.style.backgroundImage = 'url(' + wallpaper + ')';
-            body.className = 'has-js';
-        </script>
         <main>
             <div class=main-content>
                 <p><a href="http://davidpadbury.com">David Padbury</a></p>

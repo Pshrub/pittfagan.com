@@ -1,15 +1,33 @@
-const express = require('express');
+import fs from 'fs';
+import express from 'express';
+import exphbs from 'express-handlebars';
+
+const wallpapers = fs.readdirSync(__dirname + '/dist/wallpapers');
+
+function randomItem(items) {
+    return items[Math.floor(Math.random() * items.length)];
+}
+
 const app = express();
 
-app.use(express.static('dist', {
-    index: false
+// Setup view engine
+app.engine('.html', exphbs({
+    extname: '.html'
 }));
-app.use(express.static('public', {
-    index: false
-}));
+app.set('views', __dirname + '/app/views');
+app.set('view engine', '.html');
+
+// Serve static directories
+['dist', 'public'].forEach(dir => {
+    app.use(express.static(dir, {
+        index: false
+    }));
+});
 
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/public/index.html');
+    res.render('index', {
+        wallpaper: randomItem(wallpapers)
+    });
 });
 
 const server = app.listen(process.env.PORT || 8080, () => {
