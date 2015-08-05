@@ -9,7 +9,7 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-var server = app.listen(process.env.PORT || 8080, function() {
+var server = app.listen(process.env.PORT || 8080, () => {
     var address = server.address();
     var host = address.address;
     var port = address.port;
