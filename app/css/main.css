@@ -1,13 +1,27 @@
-body {
-    background-color: #000;
-    color: #fff;
-    font-family: Calluna-Regular;
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+html {
     background-size: cover;
     background-position: center;
 }
 
+body {
+    color: #fff;
+    font-family: Calluna-Regular;
+}
+
 main {
-    display: block;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 main a {
@@ -16,8 +30,6 @@ main a {
 }
 
 main .main-content {
-    position: relative;
-    top: 50%;
     font-size: 30px;
     text-align: center;
     letter-spacing: -0.01em;
@@ -30,17 +42,6 @@ main .main-content {
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-}
-
-body.no-js main .main-content {
-    margin-top: 50px;
-}
-
-body.has-js main .main-content {
-    -ms-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
 }
 
 main .main-content p {
