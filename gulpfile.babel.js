@@ -8,6 +8,8 @@ import rp from 'request-promise';
 import request from 'request';
 import unzip from 'unzip';
 import mkdirp from 'mkdirp-promise';
+import minifyCss from 'gulp-minify-css';
+import concat from 'gulp-concat';
 
 gulp.task('clean', (callback) => {
     del('dist', callback);
@@ -52,6 +54,13 @@ gulp.task('fetch-fonticons', async function() {
             .on('finish', resolve)
             .on('error', reject);
     });
+});
+
+gulp.task('minify-css', () => {
+    return gulp.src([ 'app/css/**/*.css', 'dist/css/fonticons.css' ])
+        .pipe(concat('main.css'))
+        .pipe(minifyCss())
+        .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('optimize-wallpapers', () => {
