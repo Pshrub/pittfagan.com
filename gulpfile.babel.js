@@ -12,7 +12,7 @@ import minifyCss from 'gulp-minify-css';
 import concat from 'gulp-concat';
 
 gulp.task('clean', (callback) => {
-    del('dist', callback);
+    del('dist', { force: true }, callback);
 });
 
 gulp.task('fetch-fonticons', async function() {
