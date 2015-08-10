@@ -56,7 +56,7 @@ gulp.task('fetch-fonticons', async function() {
     });
 });
 
-gulp.task('minify-css', () => {
+gulp.task('minify-css', [ 'fetch-fonticons' ], () => {
     return gulp.src([ 'app/css/**/*.css', 'dist/css/fonticons.css' ])
         .pipe(concat('main.css'))
         .pipe(minifyCss())
@@ -72,4 +72,4 @@ gulp.task('optimize-wallpapers', () => {
         .pipe(gulp.dest('dist/wallpapers'));
 });
 
-gulp.task('build', [ 'optimize-wallpapers', 'fetch-fonticons' ]);
+gulp.task('build', [ 'optimize-wallpapers', 'fetch-fonticons', 'minify-css' ]);
