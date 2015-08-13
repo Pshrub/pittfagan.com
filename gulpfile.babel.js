@@ -39,19 +39,16 @@ gulp.task('fetch-fonticons', async function() {
                     || filename === 'fonticons-embedded.css'; // only need the embedded version of the css
 
                 if (use) {
-                    if (ext === 'css') {
-                        // put in css dir
-                        entry.pipe(fs.createWriteStream(`${__dirname}/dist/css/fonticons.css`));
-                    } else {
-                        // put in fonts dir
-                        entry.pipe(fs.createWriteStream(`${__dirname}/dist/font/${filename}`));
-                    }
+                    const destPath = ext === 'css' ? 'css/fonticons.css' : `font/${filename}`;
+                    const destFullPath = `${__dirname}/dist/${destPath}`;
+
+                    entry.pipe(fs.createWriteStream(destFullPath));
                 } else {
                     // ignore
                     entry.autodrain();
                 }
             })
-            .on('finish', resolve)
+            .on('close', resolve)
             .on('error', reject);
     });
 });
