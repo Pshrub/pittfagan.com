@@ -1,6 +1,7 @@
 import fs from 'fs';
 import express from 'express';
 import exphbs from 'express-handlebars';
+import compression from 'compression';
 
 const wallpapers = fs.readdirSync(__dirname + '/dist/wallpapers');
 
@@ -9,6 +10,9 @@ function randomItem(items) {
 }
 
 const app = express();
+
+// gzip responses
+app.use(compression());
 
 // Setup view engine
 app.engine('.html', exphbs({
