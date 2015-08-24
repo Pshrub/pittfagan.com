@@ -21,7 +21,8 @@
     "babel": "^5.8.20",
     "compression": "^1.5.2",
     "express": "^4.13.3",
-    "express-handlebars": "^2.0.1"
+    "express-handlebars": "^2.0.1",
+    "files-hash": "^1.0.1"
   },
   "devDependencies": {
     "del": "^1.2.0",

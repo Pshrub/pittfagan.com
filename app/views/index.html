@@ -2,10 +2,10 @@
 <html>
     <head>
         <title>David Padbury</title>
-        <link rel=stylesheet href="css/main.css" />
+        <link rel=stylesheet href="css/main.css?{{hashes.[css/main.css]}}" />
         <style>
             html {
-                background-image: url('wallpapers/{{wallpaper}}');
+                background-image: url('wallpapers/{{wallpaper}}?{{lookup hashes (concat 'wallpapers/' wallpaper)}}');
             }
         </style>
     </head>
