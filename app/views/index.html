@@ -29,11 +29,12 @@
                     var loaded = e.loaded;
                     var total = e.total;
                     var progress = loaded/total;
-                    console.log(progress);
 
                     progressBar.style.transform = 'scaleX(' + progress + ')';
                 };
                 xhr.onload = function() {
+                    progressBar.className = 'done';
+                    progressBar.style.transform = '';
                     coverStyle.backgroundImage = backgroundImage;
                     coverStyle.opacity = 1;
                     xhr = null;
