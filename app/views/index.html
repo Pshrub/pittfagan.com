@@ -7,21 +7,41 @@
     <body>
         <div id=cover style="background-image: url('wallpapers/{{wallpaper}}?{{lookup hashes (concat 'wallpapers/' wallpaper)}}');"></div>
         <script>
-            var cover = document.getElementById('cover');
-            var coverStyle = cover.style;
-            var backgroundImage = coverStyle.backgroundImage;
+            (function() {
+                var cover = document.getElementById('cover');
+                var coverStyle = cover.style;
+                var backgroundImage = coverStyle.backgroundImage;
 
-            coverStyle.backgroundImage = '';
-            coverStyle.opacity = 0;
+                coverStyle.backgroundImage = '';
+                coverStyle.opacity = 0;
 
-            var imagePath = /\(([^\)]+)\)/.exec(backgroundImage)[1];
+                var imagePath = /\(([^\)]+)\)/.exec(backgroundImage)[1];
 
-            var img = document.createElement('img');
-            img.onload = function() {
-                coverStyle.backgroundImage = backgroundImage;
-                coverStyle.opacity = 1;
-            };
-            img.src = imagePath;
+                var progressBar = document.createElement('div');
+                progressBar.id = 'progress';
+                document.body.appendChild(progressBar);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.onprogress = function(e) {
+                    if (!e.lengthComputable) return;
+
+                    var loaded = e.loaded;
+                    var total = e.total;
+                    var progress = loaded/total;
+                    console.log(progress);
+
+                    progressBar.style.transform = 'scaleX(' + progress + ')';
+                };
+                xhr.onload = function() {
+                    coverStyle.backgroundImage = backgroundImage;
+                    coverStyle.opacity = 1;
+                    xhr = null;
+                };
+
+                xhr.open('GET', imagePath, true);
+                xhr.send();
+            })();
         </script>
         <main>
             <div class=main-content>
