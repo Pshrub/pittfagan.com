@@ -64,6 +64,8 @@ gulp.task('optimize-wallpapers', () => {
     return gulp.src('wallpapers/*.jpg')
         .pipe(imagemin({
             use: [jpegRecompress({
+                quality: 'low',
+                progressive: false
             })]
         }))
         .pipe(gulp.dest('dist/wallpapers'));

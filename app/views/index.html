@@ -3,13 +3,26 @@
     <head>
         <title>David Padbury</title>
         <link rel=stylesheet href="css/main.css?{{hashes.[css/main.css]}}" />
-        <style>
-            html {
-                background-image: url('wallpapers/{{wallpaper}}?{{lookup hashes (concat 'wallpapers/' wallpaper)}}');
-            }
-        </style>
     </head>
     <body>
+        <div id=cover style="background-image: url('wallpapers/{{wallpaper}}?{{lookup hashes (concat 'wallpapers/' wallpaper)}}');"></div>
+        <script>
+            var cover = document.getElementById('cover');
+            var coverStyle = cover.style;
+            var backgroundImage = coverStyle.backgroundImage;
+
+            coverStyle.backgroundImage = '';
+            coverStyle.opacity = 0;
+
+            var imagePath = /\(([^\)]+)\)/.exec(backgroundImage)[1];
+
+            var img = document.createElement('img');
+            img.onload = function() {
+                coverStyle.backgroundImage = backgroundImage;
+                coverStyle.opacity = 1;
+            };
+            img.src = imagePath;
+        </script>
         <main>
             <div class=main-content>
                 <p><a href="http://davidpadbury.com">David Padbury</a></p>
