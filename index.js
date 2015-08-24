@@ -19,6 +19,9 @@ let hashes = {};
     hashes = await hash('**/*', { cwd: 'dist' });
 })();
 
+// loads script to inline in main page
+const mainInlineScript = fs.readFileSync(__dirname + '/dist/js/main.js');
+
 // gzip responses
 app.use(compression());
 
@@ -44,6 +47,7 @@ app.set('view engine', '.html');
 app.get('/', function(req, res) {
     res.render('index', {
         wallpaper: randomItem(wallpapers),
+        mainInlineScript,
         hashes,
         helpers: {
             concat: function(...args) {

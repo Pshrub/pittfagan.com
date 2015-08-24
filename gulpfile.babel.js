@@ -11,6 +11,7 @@ import mkdirp from 'mkdirp-promise';
 import minifyCss from 'gulp-minify-css';
 import concat from 'gulp-concat';
 import autoprefixer from 'gulp-autoprefixer';
+import uglify from 'gulp-uglify';
 
 gulp.task('clean', (callback) => {
     del('dist', { force: true }, callback);
@@ -64,6 +65,12 @@ gulp.task('minify-css', [ 'fetch-fonticons' ], () => {
         .pipe(gulp.dest('dist/css'));
 });
 
+gulp.task('minify-js', () => {
+    return gulp.src('app/js/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js'));
+});
+
 gulp.task('optimize-wallpapers', () => {
     return gulp.src('wallpapers/*.jpg')
         .pipe(imagemin({
@@ -75,4 +82,4 @@ gulp.task('optimize-wallpapers', () => {
         .pipe(gulp.dest('dist/wallpapers'));
 });
 
-gulp.task('build', [ 'optimize-wallpapers', 'fetch-fonticons', 'minify-css' ]);
+gulp.task('build', [ 'optimize-wallpapers', 'fetch-fonticons', 'minify-css', 'minify-js' ]);
