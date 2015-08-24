@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import gulp from 'gulp';
+import gutil from 'gulp-util';
 import del from 'del';
 import imagemin from 'gulp-imagemin';
 import jpegRecompress from 'imagemin-jpeg-recompress';
@@ -12,9 +13,12 @@ import minifyCss from 'gulp-minify-css';
 import concat from 'gulp-concat';
 import autoprefixer from 'gulp-autoprefixer';
 import uglify from 'gulp-uglify';
+import throat from 'throat';
+import timer from './lib/timer';
+import S3Photos from './lib/s3-photos';
 
 gulp.task('clean', (callback) => {
-    del('dist', { force: true }, callback);
+    del(['dist', 'wallpapers'], { force: true }, callback);
 });
 
 gulp.task('fetch-fonticons', async function() {
@@ -71,14 +75,30 @@ gulp.task('minify-js', () => {
         .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('optimize-wallpapers', () => {
+gulp.task('download-wallpapers', async function() {
+    const client = new S3Photos();
+    const photos = await client.list();
+
+    // ensure we have the wallpapers dir
+    await mkdirp(__dirname + '/wallpapers');
+
+    const downloadPromises = photos.map(throat(10, async function(photo) {
+        const localPath = __dirname + '/wallpapers/' + photo;
+        const time = timer();
+
+        await client.download(photo, localPath);
+
+        gutil.log(`Downloaded ${photo}`, `${time()} ms`);
+    }));
+
+    await Promise.all(downloadPromises);
+});
+
+gulp.task('optimize-wallpapers', [ 'download-wallpapers' ], () => {
     return gulp.src('wallpapers/*.jpg')
-        .pipe(imagemin({
-            use: [jpegRecompress({
-                quality: 'low',
-                progressive: false
-            })]
-        }))
+        .pipe(jpegRecompress({
+            quality: 'low'
+        })())
         .pipe(gulp.dest('dist/wallpapers'));
 });
 

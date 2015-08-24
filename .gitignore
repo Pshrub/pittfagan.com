@@ -9,6 +9,7 @@ node_modules/
 
 # build artifacts
 dist
+wallpapers
 
 # logs
 npm-debug.log
