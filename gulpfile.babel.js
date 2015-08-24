@@ -10,6 +10,7 @@ import unzip from 'unzip';
 import mkdirp from 'mkdirp-promise';
 import minifyCss from 'gulp-minify-css';
 import concat from 'gulp-concat';
+import autoprefixer from 'gulp-autoprefixer';
 
 gulp.task('clean', (callback) => {
     del('dist', { force: true }, callback);
@@ -56,6 +57,9 @@ gulp.task('fetch-fonticons', async function() {
 gulp.task('minify-css', [ 'fetch-fonticons' ], () => {
     return gulp.src([ 'app/css/**/*.css', 'dist/css/fonticons.css' ])
         .pipe(concat('main.css'))
+        .pipe(autoprefixer({
+            browsers: [ 'last 4 versions' ]
+        }))
         .pipe(minifyCss())
         .pipe(gulp.dest('dist/css'));
 });
