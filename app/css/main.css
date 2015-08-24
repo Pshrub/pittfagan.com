@@ -22,17 +22,13 @@ html, body {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
     height: 3px;
     background-color: white;
-    transition: transform 0.2s;
-    transform-origin: 0 0;
-    transform: scaleX(0);
+    transition: width 0.2s, transform 2s;
 }
 
 #progress.done {
-    transition: transform 0.5s;
-    transform: scaleX(1) translateY(-10px);
+    transform: translateY(-3px);
 }
 
 body {
