@@ -22,7 +22,8 @@
     "compression": "^1.5.2",
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
-    "files-hash": "^1.0.1"
+    "files-hash": "^1.0.1",
+    "spdy": "^2.0.4"
   },
   "devDependencies": {
     "common-env": "^4.1.0",

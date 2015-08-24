@@ -3,6 +3,7 @@ import express from 'express';
 import exphbs from 'express-handlebars';
 import compression from 'compression';
 import hash from 'files-hash';
+import spdy from 'spdy';
 
 const wallpapers = fs.readdirSync(__dirname + '/dist/wallpapers');
 
@@ -58,7 +59,21 @@ app.get('/', function(req, res) {
     });
 });
 
-const server = app.listen(process.env.PORT || 8080, () => {
+const certPath = process.env.CERT;
+const spdyConfig = {
+    spdy: {
+        // enable ssl if there's a cert supplied, use plain if not
+        ssl: !!certPath,
+        plain: !certPath
+    }
+};
+
+if (certPath) {
+    spdyConfig.key = fs.readFileSync(certPath + '.key');
+    spdyConfig.cert = fs.readFileSync(certPath + '.crt');
+};
+
+const server = spdy.createServer(spdyConfig, app).listen(process.env.PORT || 8080, () => {
     const address = server.address();
     const host = address.address;
     const port = address.port;
