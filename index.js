@@ -1,4 +1,5 @@
 import fs from 'fs';
+import http from 'http';
 import express from 'express';
 import exphbs from 'express-handlebars';
 import compression from 'compression';
@@ -72,6 +73,23 @@ if (certPath) {
     spdyConfig.key = fs.readFileSync(certPath + '.key');
     spdyConfig.cert = fs.readFileSync(certPath + '.crt');
 };
+
+// Redirect traffic if specificed
+// Should be used for redirecting http to https
+if (process.env.REDIRECT_URL && process.env.REDIRECT_PORT) {
+    const redirectServer = http.createServer((req, res) => {
+        res.writeHead(301, { 'Location': `${process.env.REDIRECT_URL}/${req.url}` });
+        res.end();
+    });
+
+    redirectServer.listen(process.env.REDIRECT_PORT, () => {
+        const address = redirectServer.address();
+        const host = address.address;
+        const port = address.port;
+
+        console.log('redirect to %s being served on http://%s:%d', process.env.REDIRECT_URL, host, port);
+    });
+}
 
 const server = spdy.createServer(spdyConfig, app).listen(process.env.PORT || 8080, () => {
     const address = server.address();
