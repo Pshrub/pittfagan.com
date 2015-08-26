@@ -84,7 +84,7 @@ if (certPath) {
 // Should be used for redirecting http to https
 if (process.env.REDIRECT_URL && process.env.REDIRECT_PORT) {
     const redirectServer = http.createServer((req, res) => {
-        res.writeHead(301, { 'Location': `${process.env.REDIRECT_URL}/${req.url}` });
+        res.writeHead(301, { 'Location': `${process.env.REDIRECT_URL}${req.url}` });
         res.end();
     });
 
