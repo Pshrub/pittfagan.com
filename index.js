@@ -27,6 +27,12 @@ const mainInlineScript = fs.readFileSync(__dirname + '/dist/js/main.js');
 // gzip responses
 app.use(compression());
 
+// change default powered by
+app.use((req, res, next) => {
+    res.set('X-Powered-By', 'Computers');
+    next();
+});
+
 // Setup view engine
 app.engine('.html', exphbs({
     extname: '.html'
