@@ -3,7 +3,7 @@
     <head>
         <title>David Padbury</title>
         <meta name=viewport content="width=device-width, initial-scale=1">
-        <link rel=stylesheet href="css/main.css?{{hashes.[css/main.css]}}" />
+        <link rel="stylesheet" href="/css/main.css?{{hashes.[css/main.css]}}">
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
@@ -18,8 +18,13 @@
         <meta name="theme-color" content="#ffffff">
     </head>
     <body>
-        <div id=cover style="background-image: url('wallpapers/{{wallpaper}}?{{lookup hashes (concat 'wallpapers/' wallpaper)}}');"></div>
-        <script>{{{mainInlineScript}}}</script>
+        <style nonce={{nonces.style}}>
+            #cover {
+                background-image: url('wallpapers/{{wallpaper}}?{{lookup hashes (concat 'wallpapers/' wallpaper)}}');
+            }
+        </style>
+        <div id=cover data-background="wallpapers/{{wallpaper}}?{{lookup hashes (concat 'wallpapers/' wallpaper)}}"></div>
+        <script nonce={{nonces.script}}>{{{inline.script}}}</script>
         <main>
             <div class=main-content>
                 <p><a href="http://davidpadbury.com">David Padbury</a></p>
@@ -30,7 +35,7 @@
                 </p>
             </div>
         </main>
-        <script>
+        <script nonce={{nonces.script}}>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

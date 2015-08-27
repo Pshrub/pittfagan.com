@@ -23,6 +23,7 @@
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
     "files-hash": "^1.0.1",
+    "randomstring": "^1.0.7",
     "spdy": "^2.0.4"
   },
   "devDependencies": {

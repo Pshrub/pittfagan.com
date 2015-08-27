@@ -35,13 +35,8 @@
     })();
 
     var cover = document.getElementById('cover');
-    var coverStyle = cover.style;
-    var backgroundImage = coverStyle.backgroundImage;
-
-    coverStyle.backgroundImage = '';
-    coverStyle.opacity = 0;
-
-    var imagePath = /\(([^\)]+)\)/.exec(backgroundImage)[1];
+    cover.className = cover.className + ' loading';
+    var imagePath = cover.attributes['data-background'].value;
 
     var progressBar = document.createElement('div');
     progressBar.id = 'progress';
@@ -77,8 +72,7 @@
             progressBar.remove();
         }));
         
-        coverStyle.backgroundImage = backgroundImage;
-        coverStyle.opacity = 1;
+        cover.className = cover.className.replace('loading', '');
         xhr = null;
     };
 

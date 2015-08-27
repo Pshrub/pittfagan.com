@@ -18,6 +18,12 @@ html, body {
     transition: opacity 1s ease-in-out;
 }
 
+#cover.loading {
+    transition: none;
+    opacity: 0;
+    background-image: none;
+}
+
 #progress {
     position: absolute;
     top: 0;
@@ -73,3 +79,6 @@ main .main-content p {
 main .main-content p.buttons {
     letter-spacing: 0.5em;
 }
+
+/* Ridicious inclusion just to hide Readibility extension that busts with CSP */
+iframe { display: none }

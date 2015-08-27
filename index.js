@@ -5,6 +5,7 @@ import exphbs from 'express-handlebars';
 import compression from 'compression';
 import hash from 'files-hash';
 import spdy from 'spdy';
+import randomstring from 'randomstring';
 
 const wallpapers = fs.readdirSync(__dirname + '/dist/wallpapers');
 
@@ -21,8 +22,10 @@ let hashes = {};
     hashes = await hash('**/*', { cwd: 'dist' });
 })();
 
-// loads script to inline in main page
-const mainInlineScript = fs.readFileSync(__dirname + '/dist/js/main.js');
+// cache main script for page inlining
+const inline = {
+    script: fs.readFileSync(__dirname + '/dist/js/main.js')
+}; 
 
 // gzip responses
 app.use(compression());
@@ -53,10 +56,24 @@ app.set('view engine', '.html');
 });
 
 app.get('/', function(req, res) {
+    const nonces = {
+        script: randomstring.generate(),
+        style: randomstring.generate()
+    };
+    const policy = `default-src 'none';`
+        + `style-src 'nonce-${nonces.style}' 'self';`
+        + `img-src 'self' https://www.google-analytics.com;`
+        + `script-src 'nonce-${nonces.script}' https://www.google-analytics.com;`
+        + `font-src data: 'self';`
+        + `connect-src 'self'`;
+
+    res.header('Content-Security-Policy', policy);
+
     res.render('index', {
         wallpaper: randomItem(wallpapers),
-        mainInlineScript,
+        inline,
         hashes,
+        nonces,
         helpers: {
             concat: function(...args) {
                 // last arg is options object, so remove from concat
