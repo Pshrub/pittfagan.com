@@ -68,6 +68,9 @@ app.get('/', function(req, res) {
         + `connect-src 'self'`;
 
     res.header('Content-Security-Policy', policy);
+    res.header('X-Frame-Options', 'DENY');
+    res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains;');
+    res.header('Public-Key-Pins', 'pin-sha256="qiyYt17x6RuAQF32gnPfSxb73D6tcMS4hQUB9z9GMX8="; max-age=5184000; includeSubdomains;');
 
     res.render('index', {
         wallpaper: randomItem(wallpapers),
