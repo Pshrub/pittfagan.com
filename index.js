@@ -6,6 +6,8 @@ import compression from 'compression';
 import hash from 'files-hash';
 import spdy from 'spdy';
 import randomstring from 'randomstring';
+import useragent from 'useragent';
+import { isSupported } from 'caniuse-api';
 
 const wallpapers = fs.readdirSync(__dirname + '/dist/wallpapers');
 
@@ -55,19 +57,40 @@ app.set('view engine', '.html');
     }));
 });
 
-app.get('/', function(req, res) {
+function supportsCSP2(ua) {
+    try {
+        const agent = useragent.parse(ua);
+        const browserString = `${agent.family} ${agent.major}`;
+        const supportsCSP2 = isSupported('contentsecuritypolicy2', browserString);
+
+        return supportsCSP2;
+    } catch (err) {
+        // theres lots of ways that agent parsing or feature lookup could fail
+        // so just assume it doesn't support csp2 if it fails
+        return false;
+    }
+}
+
+function buildCSP(ua) {
+    const csp2 = supportsCSP2(ua);
     const nonces = {
         script: randomstring.generate(),
         style: randomstring.generate()
     };
     const policy = `default-src 'none';`
-        + `style-src 'nonce-${nonces.style}' 'self';`
+        + `style-src ${csp2 ? "'nonce-${nonces.style}'" : "'unsafe-inline'"} 'self';`
         + `img-src 'self' https://www.google-analytics.com;`
-        + `script-src 'nonce-${nonces.script}' https://www.google-analytics.com;`
+        + `script-src ${csp2 ? "'nonce-${nonces.script}'" : "'unsafe-inline'"} https://www.google-analytics.com;`
         + `font-src data: 'self';`
         + `connect-src 'self'`;
 
-    res.header('Content-Security-Policy', policy);
+    return { policy, nonces };
+}
+
+app.get('/', function(req, res) {
+    const csp = buildCSP(req.headers['user-agent']);
+
+    res.header('Content-Security-Policy', csp.policy);
     res.header('X-Frame-Options', 'DENY');
     res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains;');
     res.header('Public-Key-Pins', 'pin-sha256="qiyYt17x6RuAQF32gnPfSxb73D6tcMS4hQUB9z9GMX8="; max-age=5184000; includeSubdomains;');
@@ -76,7 +99,7 @@ app.get('/', function(req, res) {
         wallpaper: randomItem(wallpapers),
         inline,
         hashes,
-        nonces,
+        nonces: csp.nonces,
         helpers: {
             concat: function(...args) {
                 // last arg is options object, so remove from concat
