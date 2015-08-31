@@ -110,18 +110,28 @@ app.get('/', function(req, res) {
     });
 });
 
-const certPath = process.env.CERT;
+const tls = {
+    key: process.env.TLS_KEY,
+    cert: process.env.TLS_CERT
+};
+
+const useTls = !!(tls.key && tls.cert);
+
+if (!useTls) {
+    console.error('WARN: HTTPS server is not being started as TLS_KEY and TLS_CERT were not supplied');
+}
+
 const spdyConfig = {
     spdy: {
         // enable ssl if there's a cert supplied, use plain if not
-        ssl: !!certPath,
-        plain: !certPath
+        ssl: useTls,
+        plain: !useTls
     }
 };
 
-if (certPath) {
-    spdyConfig.key = fs.readFileSync(certPath + '.key');
-    spdyConfig.cert = fs.readFileSync(certPath + '.crt');
+if (useTls) {
+    spdyConfig.key = fs.readFileSync(tls.key);
+    spdyConfig.cert = fs.readFileSync(tls.cert);
 };
 
 // Redirect traffic if specificed
