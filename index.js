@@ -78,9 +78,9 @@ function buildCSP(ua) {
         style: randomstring.generate()
     };
     const policy = `default-src 'none';`
-        + `style-src ${csp2 ? "'nonce-${nonces.style}'" : "'unsafe-inline'"} 'self';`
+        + `style-src ${csp2 ? `'nonce-${nonces.style}'` : "'unsafe-inline'"} 'self';`
         + `img-src 'self' https://www.google-analytics.com;`
-        + `script-src ${csp2 ? "'nonce-${nonces.script}'" : "'unsafe-inline'"} https://www.google-analytics.com;`
+        + `script-src ${csp2 ? `'nonce-${nonces.script}'` : "'unsafe-inline'"} https://www.google-analytics.com;`
         + `font-src data: 'self';`
         + `connect-src 'self'`;
 
