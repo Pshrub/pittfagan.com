@@ -90,6 +90,7 @@ function buildCSP(ua) {
 app.get('/', function(req, res) {
     const csp = buildCSP(req.headers['user-agent']);
 
+    res.header('X-Content-Security-Policy', csp.policy);
     res.header('Content-Security-Policy', csp.policy);
     res.header('X-Frame-Options', 'DENY');
     res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains;');
