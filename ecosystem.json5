@@ -1,0 +1,28 @@
+{
+    apps: [
+       {
+            name: "davidpadbury.com",
+            script: "index.js",
+            "exec_interpreter": "babel-node",
+            env: {
+            },
+            env_production : {
+                NODE_ENV: "production"
+            }
+       },
+    ],
+    /**
+    * For more help go to :
+    * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment-pm2--090
+    */
+    deploy : {
+        production : {
+            user : "node",
+            host : "45.55.54.184",
+            ref  : "origin/master",
+            repo : "git@bitbucket.org:davidpadbury/davidpadbury.com.git",
+            path : "/var/www/davidpadbury.com",
+            "post-deploy" : "pm2 startOrRestart ecosystem.json5 --env production"
+        }
+    }
+}
