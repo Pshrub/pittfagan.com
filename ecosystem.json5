@@ -22,7 +22,7 @@
             ref  : "origin/master",
             repo : "git@bitbucket.org:davidpadbury/davidpadbury.com.git",
             path : "/var/www/davidpadbury.com",
-            "post-deploy" : "npm install && `npm bin`/gulp clean build && pm2 startOrRestart ecosystem.json5 --env production"
+            "post-deploy" : "source /var/www/.davidpadbury.com.secrets && npm install && `npm bin`/gulp clean build && pm2 startOrRestart ecosystem.json5 --env production"
         }
     }
 }
