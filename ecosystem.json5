@@ -3,7 +3,7 @@
        {
             name: "davidpadbury.com",
             script: "index.js",
-            "exec_interpreter": "babel-node",
+            "next-gen-js": true,
             env: {
             },
             env_production : {
