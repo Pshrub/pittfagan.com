@@ -3,7 +3,7 @@
        {
             name: "davidpadbury.com",
             script: "index.js",
-            "next-gen-js": true,
+            "next_gen_js": true,
             env: {
             },
             env_production : {
