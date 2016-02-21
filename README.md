@@ -1,7 +1,6 @@
-# [davidpadbury.com](https://davidpadbury.com)
+# [pittfagan.com](https://pittfagan.com)
 
-A horribly over complicated little website mainly done while travelling South America for too long to not forget what JavaScript looks like.
 
-Particularly experiments with http2, messes with content security policies, and does some silly things in the name of performance.
 
-![Screenshot](http://i.imgur.com/PIlojtg.jpg)
+[comment]: ![Screenshot](http://i.imgur.com/PIlojtg.jpg)
+Simple webpage that tells you a bit about myself, displays some photos I've taken on my travels around the world, with links to the social media/organizations I am involved with.
