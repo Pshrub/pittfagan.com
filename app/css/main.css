@@ -60,10 +60,10 @@ main a {
 }
 
 main .main-content {
-    font-size: 30px;
+    font-size: 50px;
     text-align: center;
     letter-spacing: -0.01em;
-    line-height: 1.45;
+    line-height: 1.95;
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
@@ -81,4 +81,4 @@ main .main-content p.buttons {
 }
 
 /* Ridicious inclusion just to hide Readibility extension that busts with CSP */
-iframe { display: none }
+/* iframe { display: none } */
