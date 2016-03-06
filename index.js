@@ -33,7 +33,8 @@ app.use((req, res, next) => {
 app.engine('.html', exphbs({
     extname: '.html'
 }));
-app.set('views', __dirname + '/app/views');
+app.set('views', __dirname + '/dist/views');
+// app.set('views', __dirname + '/app/views');
 app.set('view engine', '.html');
 
 // Serve static directories
