@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"no tests\";exit 1;"
+    "test": "echo \"no tests\";exit 0;"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
     "files-hash": "^1.0.1",
+    "font-awesome": "^4.5.0",
     "randomstring": "^1.0.7",
     "spdy": "^2.0.4",
     "useragent": "^2.1.7"

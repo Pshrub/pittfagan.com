@@ -61,7 +61,7 @@ main a {
 
 main .main-content {
     font-size: 40px;
-    text-align: left;
+    text-align: center;
     letter-spacing: -0.01em;
     line-height: 1.45;
     margin: 10px;
@@ -74,6 +74,12 @@ main .main-content {
 main .main-content p {
     margin: 0;
     padding: 0;
+}
+
+main .main-content p.name {
+  position: absolute;
+  left: 10px;
+  top: 10px;
 }
 
 main .main-content p.buttons {
