@@ -1,3 +1,4 @@
+/*
 (function() {
     function once(fn) {
         var called = false;
@@ -44,7 +45,7 @@
 
     var xhr = new XMLHttpRequest();
 
-    xhr.onprogress = (function() { 
+    xhr.onprogress = (function() {
         var lastProgress = -1;
         var markedActive = false;
         return function(e) {
@@ -71,7 +72,7 @@
         onTransitionEnd(progressBar, once(function() {
             progressBar.remove();
         }));
-        
+
         cover.className = cover.className.replace('loading', '');
         xhr = null;
     };
@@ -79,3 +80,5 @@
     xhr.open('GET', imagePath, true);
     xhr.send();
 })();
+
+*/
