@@ -50,8 +50,6 @@ body {
 
 main {
     position: relative;
-    top: 10%;
-    transform: translateY(-50%);
 }
 
 main a {
@@ -64,8 +62,6 @@ main .main-content {
     text-align: center;
     letter-spacing: -0.01em;
     line-height: 1.45;
-    margin: 10px;
-    padding: 10px;
     -webkit-font-smoothing: antialiased;
     text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
     user-select: none;
@@ -84,7 +80,8 @@ main .main-content p.name {
 
 main .main-content p.buttons {
     letter-spacing: 0.5em;
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    text-align: center;
 }
-
-/* Ridicious inclusion just to hide Readibility extension that busts with CSP */
-/* iframe { display: none } */
