@@ -1,4 +1,4 @@
-ssh root@pittfagan.com << EOF
+ssh root@104.236.11.185 << EOF
 	  cd /var/www/pittfagan.com/
 	  git reset --hard HEAD
 	  git fetch --all
